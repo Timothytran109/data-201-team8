@@ -6,13 +6,15 @@ FROM ORDERS
 GROUP BY order_month
 ORDER BY order_month;
 
-# Order status
+# Which sellers generate the most sales
 
-SELECT order_status,
-       COUNT(*) AS total_orders
-FROM ORDERS
-GROUP BY order_status
-ORDER BY total_orders DESC;
+SELECT seller_id,
+       Count(*) AS items_sold
+       Round(SUM(price), 2) AS total_revenue
+       FROM order_items
+       ORDER BY seller_id
+       ORDER BY total_revenue DESC
+       LIMIT 5;
 
 # Which product categories generate the most revenue
 
